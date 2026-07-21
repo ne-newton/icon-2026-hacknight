@@ -32,7 +32,7 @@ Treat the single-letter variable names as fixed IDs rather than renaming them. R
 
 | Variable | What it is |
 |---|---|
-| `b` | Canvas tools catalog: an array of `{label, tools}` groups (Courses, Assignments, Modules, Pages, Discussions, Announcements, Conversations, Users & Enrollments, and Outcomes). Each tool is `{name, description, type, critical, enabled}`. |
+| `b` | Canvas tools catalog: an array of `{label, tools}` groups (Courses, Assignments, Modules, Pages, Discussions, Announcements, Conversations, Users & Enrollments, Outcomes, and Impersonation). Each tool is `{name, description, type, critical, enabled}`. `type` is usually `Read`, `Write`, or `Destructive`, but the Impersonation group uses a fourth type, `Impersonation`, for step-up-only capabilities that aren't CRUD operations (see below). |
 | `x` | Kyron connector's tools (lesson library). |
 | `S` | WooClap connector's tools. |
 | `C` | Third-party connectors list: `[{label, icon, tools}]` for Kyron and WooClap. |
@@ -41,7 +41,7 @@ Treat the single-letter variable names as fixed IDs rather than renaming them. R
 | `fe` | Credit cost reference table: `{task, credits}`. |
 | `E` | Role list: `Admin`, `Teacher`, `TA`, `Designer`. |
 
-To add a Canvas tool, add an entry to the right group's `tools` array in `b`, matching the existing `{name, description, type, critical, enabled}` shape. `type` is one of `Read`, `Write`, or `Destructive`; it drives the colored badge and which permission options show up. `critical` locks the enabled toggle on, so it can't be switched off in the UI.
+To add a Canvas tool, add an entry to the right group's `tools` array in `b`, matching the existing `{name, description, type, critical, enabled}` shape. `type` is one of `Read`, `Write`, or `Destructive`; it drives the colored badge and which permission options show up. The `Impersonation` group's `impersonate_user` tool uses a fourth type, also called `Impersonation`, for capabilities that need step-up auth but aren't CRUD operations — it gets the same red badge and `ask`/`reauth` permission options as `Destructive`, but defaults to `reauth` instead of `ask`. `critical` locks the enabled toggle on, so it can't be switched off in the UI.
 
 To add a connector, add a tools array (like `x` or `S`) and register it in `C` with a `label` and an InstUI icon.
 
